@@ -1,0 +1,74 @@
+<!--
+Schema {
+  topic: {type: String, required: true },
+  subTopics: [String],
+  x questionText: {type: String, required: true },
+  x answerChoices: [String],
+  x answerIndex: {type: Number, required: true },
+  userID: {type: Number, required: true },
+}
+-->
+
+<h1>Create Questions</h1>
+<div class='row'>
+  <div class='col-xs-12 col-md-3'>
+    <h3>Topic/Subtopic:</h3>
+  </div>
+  <div class='col-xs-12 col-md-4 pad12'>
+    <select class='form-control' ng-options='topic as topic.name for topic in topics track by topic.name'
+            ng-model='currentTopic'></select>
+  </div>
+  <div class='col-xs-12 col-md-4' class='pad12'>
+    <label ng-repeat='st in topics[findIndex(currentTopic)].subTopics' style='width:100%;' >
+      <input type='checkbox' ng-checked='checkboxExists(st)'
+             value='{{st}}' ng-click='toggleCheckbox(st)'
+             >
+      {{st}}
+    </label>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class='col-xs-12 col-md-3'>
+    <h3>Question Text:</h3>
+  </div>
+  <div class='col-xs-12 col-md-8'>
+    <textarea class='form-control' ng-model='questionText'></textarea>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class='col-xs-12 col-md-3'>
+    <h3>Answer Choices:</h3>
+  </div>
+  <div class='col-xs-12 col-md-8'>
+    <input type='text' ng-model='answerChoices[0]' class='form-control'>
+    <input type='text' ng-model='answerChoices[1]' class='form-control'>
+    <input type='text' ng-model='answerChoices[2]' class='form-control'>
+    <input type='text' ng-model='answerChoices[3]' class='form-control'>
+    <input type='text' ng-model='answerChoices[4]' class='form-control'>
+    <input type='text' ng-model='answerChoices[5]' class='form-control'>
+    <input type='text' ng-model='answerChoices[6]' class='form-control'>
+    <input type='text' ng-model='answerChoices[7]' class='form-control'>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class='col-xs-12 col-md-3'>
+    <h3>Correct Answer</h3>
+  </div>
+  <div class='col-xs-12 col-md-4'>
+    <input type='number' class='form-control' ng-model='answerIndex'>
+  </div>
+  <div class='col-xs-12 col-md-4'>
+    <div class='pad12'>(please enter answer index as a number)</div>
+  </div>
+</div>
+<hr>
+<div class='row'>
+  <div class='col-xs-12'>
+    <a class='btn btn-primary center-block' ng-click='submit()'>Create Question!</a>
+  </div>
+</div>
+<br><br>
+
