@@ -1,5 +1,6 @@
 app.controller('QuestionsController', ['questionsService', 'topicsService', '$scope',
 function(questionsService, topicsService, $scope){
+  $scope.adaptive=true;
   $scope.topics = [];
   $scope.answerChoices = [];
   topicsService.getTopics()
@@ -34,7 +35,8 @@ function(questionsService, topicsService, $scope){
       subTopics: $scope.subTopicsSelected,
       questionText: $scope.questionText,
       answerChoices: $scope.answerChoices.filter(e=>e.length),
-      answerIndex: $scope.answerIndex
+      answerIndex: $scope.answerIndex,
+      questionType: $scope.adaptive?'adaptive':'mc'
     };
     questionsService.postQuestion(data)
     .success(res=>{

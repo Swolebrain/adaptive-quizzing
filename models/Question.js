@@ -6,7 +6,10 @@ const QuestionSchema = new mongoose.Schema({
   questionText: {type: String, required: true },
   answerChoices: [String],
   answerIndex: {type: Number, required: true },
+  questionType: {type: String, enum: ['adaptive', 'mc']},
   userID: {type: Number, required: true },
 });
+
+
 
 module.exports = mongoose.model('Question', QuestionSchema);

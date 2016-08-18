@@ -5,3 +5,9 @@
 .pad12{
   padding-top:12px;
 }
+
+.tinyTopRight{
+  position: absolute;
+  right:1%;
+  top: 0;
+}

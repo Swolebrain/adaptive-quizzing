@@ -57,14 +57,23 @@ Schema {
   <div class='col-xs-12 col-md-3'>
     <h3>Correct Answer</h3>
   </div>
-  <div class='col-xs-12 col-md-4'>
+  <div class='col-xs-6 col-md-2'>
     <input type='number' class='form-control' ng-model='answerIndex'>
   </div>
-  <div class='col-xs-12 col-md-4'>
-    <div class='pad12'>(please enter answer index as a number)</div>
+  <div class='col-xs-6 col-md-2'>
+    <div >(please enter answer index as a number)</div>
+  </div>
+  <div class='col-xs-6 col-md-3'>
+    <h3>Adaptive Question?</h3>
+    
+  </div>
+  <div class='col-xs-6 col-md-1'>
+    <br>
+    <input type='checkbox' ng-model='adaptive' class=''>
   </div>
 </div>
 <hr>
+
 <div class='row'>
   <div class='col-xs-12'>
     <a class='btn btn-primary center-block' ng-click='submit()'>Create Question!</a>
