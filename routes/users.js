@@ -9,8 +9,8 @@ module.exports = function(app, User){
       if (user){
         //compare password
         if (bcrypt.compareSync(req.body.password, user.password)){
-          console.log('correctly authenticated user '+user.username)
-          prepSession(req, user)
+          console.log('correctly authenticated user '+user.username);
+          prepSession(req, user);
           res.redirect('/');
         }
         else{
@@ -61,4 +61,5 @@ module.exports = function(app, User){
 function prepSession(req, user){
   req.session.isAuthenticated = true;
   req.session.username = user.username;
+  req.session.uid = user._id;
 }

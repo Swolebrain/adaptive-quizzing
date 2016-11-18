@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const User = require('./User.js')
 
 const QuestionSchema = new mongoose.Schema({
   topic: {type: String, required: true },
@@ -7,7 +8,7 @@ const QuestionSchema = new mongoose.Schema({
   answerChoices: [String],
   answerIndex: {type: Number, required: true },
   questionType: {type: String, enum: ['adaptive', 'mc']},
-  userID: {type: Number, required: true },
+  userID: {type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 });
 
 

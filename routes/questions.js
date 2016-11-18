@@ -38,7 +38,7 @@ module.exports = function(app, Question){
 
   app.post('/api/questions', function(req,res){
     let q = new Question(req.body);
-    if (!q.userID) q.userID=1;
+    if (!q.userID) q.userID=req.session.uid;
     q.save()
     .then(()=>
           res.json({ message: 'Question added to database!', data: q}))

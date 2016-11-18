@@ -32,6 +32,10 @@ const app = angular.module('AdaptiveQuizzing', ['ngRoute'])
       templateUrl: 'templates/questions.html',
       controller: 'QuestionsController'
     })
+    .when('/quiz', {
+      templateUrl: 'templates/quiz.html',
+      controller: 'QuizController'
+    })
     .when('/', {
       templateUrl: '/templates/home.html',
       controller: 'HomeController'

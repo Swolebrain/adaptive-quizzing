@@ -65,6 +65,7 @@ app.get('/quiz', (req,res)=>{
 require('./routes/questions.js')(app, Question);
 require('./routes/topics.js')(app, Topic);
 require('./routes/users.js')(app, User);
+require('./routes/quiz.js')(app, Question);
 
 function shouldNotAuth(req){
   const openPaths = ['/api/users/login',
