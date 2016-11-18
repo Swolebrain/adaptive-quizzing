@@ -20,7 +20,7 @@ User.findOne({username: 'vmoreno'}, (err, person) => {
       password: 'abc123',
       admin: true
     }).save().then( ()=>console.log("saved admin user"));
-    
+
   }
   else console.log('Found person: '+JSON.stringify(person));
 });
@@ -56,16 +56,23 @@ app.get('/', (req,res)=>{
   console.log('request to /');
   res.render('main', {username: req.session.username});
 });
+
+app.get('/quiz', (req,res)=>{
+  console.log('request to /quiz');
+  res.render('quiz');
+});
+
 require('./routes/questions.js')(app, Question);
 require('./routes/topics.js')(app, Topic);
 require('./routes/users.js')(app, User);
 
 function shouldNotAuth(req){
-  const openPaths = ['/api/users/login', 
-                     '/api/users/register', 
+  const openPaths = ['/api/users/login',
+                     '/api/users/register',
+                     '/quiz',
                      'logout'];
   return req.session.isAuthenticated || openPaths.indexOf(req.path) >= 0;
-    
+
 }
 
 const port = 3333;
