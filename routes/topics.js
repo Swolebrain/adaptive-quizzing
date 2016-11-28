@@ -3,8 +3,15 @@
 module.exports = function(app, Topic){
   app.get('/api/topics', function(req, res){
     console.log('Received GET request to /topics');
-    Topic.find()
-    .exec( (err, docs)=> err?res.end(err):res.json(docs))
+    Topic.find({})
+    .then(result=>{
+      res.json(result);
+    })
+    .catch(err=>{
+      console.log(err.toString());
+      res.status(500).send(err.toString());
+    })
+    // .exec( (err, docs)=> err?res.end(err):res.json(docs))
   });
 
   app.post('/api/topics', function(req, res){

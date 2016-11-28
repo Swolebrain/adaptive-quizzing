@@ -19,7 +19,7 @@ angular.module('QuizFrontEnd', ['ngRoute'])
   }])
   .factory('topicsService', ['$http', function($http){
     function getTopics(){
-      return $http.get('api/topics')
+      return $http.get('/api/topics')
         .catch(err=>console.log(err));
     }
     return {getTopics};
@@ -29,7 +29,7 @@ angular.module('QuizFrontEnd', ['ngRoute'])
       console.log("Quiz Controller running");
       $scope.topics = [];
       topicsService.getTopics().then(res=>{
-        //console.log(res);
+        console.log(res);
         $scope.topics=res.data;
       });
 

@@ -11,3 +11,8 @@
   right:1%;
   top: 0;
 }
+
+#subtopics li,
+.answerChoice {
+  margin-top: 5px;
+}
