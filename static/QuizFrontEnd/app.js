@@ -51,16 +51,18 @@ angular.module('QuizFrontEnd', ['ngRoute'])
         .then(res=>{
           $scope.questions=res.data;
         });
+      let correctMessage = document.getElementById('correctMessage');
+      let wrongMessage = document.getElementById('wrongMessage');
+      let resultsContainer = document.getElementById('resultsContainer');
+      let nextButton = document.getElementById('nextButton');
+      nextButton.style.display = 'inline-block';
       $scope.checkAndNext = function(){
-        let radios = document.getElementsByName('answerChoices');
-        let correctMessage = document.getElementById('correctMessage');
-        let wrongMessage = document.getElementById('wrongMessage');
-        let resultsContainer = document.getElementById('resultsContainer');
+        let answers = document.getElementsByName('answerChoices');
         function showGradingMessage(messageType) {
           messageType.classList.add('showMessage');
           $timeout(function() {
             messageType.classList.remove('showMessage');
-          }, 1500);
+          }, 1200);
         }
         function incrementQuestionIndex() {
           $scope.currentQuestion++;
@@ -69,15 +71,16 @@ angular.module('QuizFrontEnd', ['ngRoute'])
             $scope.grade = `${$scope.correct} / ${$scope.questions.length}`;
             $scope.gradePercent = (Math.round($scope.correct / $scope.questions.length * 100)).toFixed(1);
             resultsContainer.style.display = 'block';
+            nextButton.style.display = 'none';
           }
         }
         // find the selected answer
-        for (let i = 0, length = radios.length; i < length; i++) {
-          if (radios[i].checked) {
+        for (let i = 0, length = answers.length; i < length; i++) {
+          if (answers[i].checked) {
             let correctAnswerIndex = $scope.questions[$scope.currentQuestion].answerChoices[$scope.questions[$scope.currentQuestion].answerIndex];
             let correctAnswerElement = document.querySelector("[data-index='" + correctAnswerIndex + "']");
             // if answer is correct
-            if(radios[i].value == correctAnswerIndex) {
+            if(answers[i].value == correctAnswerIndex) {
               // let user know they were correct and go to next question
               showGradingMessage(correctMessage);
               if($scope.wrong) {
@@ -87,7 +90,7 @@ angular.module('QuizFrontEnd', ['ngRoute'])
                 $scope.correct++;
                 $scope.wrong = false;
               }
-              $timeout(incrementQuestionIndex, 1400);
+              $timeout(incrementQuestionIndex, 1000);
             }
             // if answer is wrong
             else {
