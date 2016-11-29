@@ -29,7 +29,6 @@ angular.module('QuizFrontEnd', ['ngRoute'])
       console.log("Quiz Controller running");
       $scope.topics = [];
       topicsService.getTopics().then(res=>{
-        console.log(res);
         $scope.topics=res.data;
       });
       $scope.startQuiz = function() {
@@ -42,18 +41,15 @@ angular.module('QuizFrontEnd', ['ngRoute'])
   }])
   .controller('RunQuizController', ['$scope', 'questionsService', '$routeParams', '$timeout', '$location',
     function($scope, questionsService, $routeParams){
-      console.log("Running quiz");
+      console.log("RunQuizController running...");
       let {topic, number} = $routeParams;
       $scope.questions = [];
       $scope.currentQuestion = 0;
       questionsService.getQuestions(topic, number)
         .then(res=>{
           $scope.questions=res.data;
-          console.log(res);
-          // don't forget to use $location, otherwise delete it from params
         });
       $scope.checkAndNext = function(){
-        console.log("checking question...");
         let radios = document.getElementsByName('answerChoices');
         let correctMessage = document.getElementById('correctMessage');
         let wrongMessage = document.getElementById('wrongMessage');

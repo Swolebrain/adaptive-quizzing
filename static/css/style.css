@@ -12,9 +12,30 @@
   top: 0;
 }
 
-#subtopics li,
-.answerChoice {
+#subtopics li {
   margin-top: 5px;
+}
+
+.quizQuestionContainer h3 {
+  margin-bottom: 20px;
+}
+
+.answerChoiceContainer {
+  margin: 10px;
+}
+
+.answerChoiceContainer input,
+.answerChoiceContainer label {
+  cursor: pointer;
+}
+
+.answerChoiceContainer input {
+  margin-right: 7px;
+}
+
+.answerChoiceContainer label:hover,
+.answerChoiceContainer label:focus {
+  background-color: #eee;
 }
 
 .gradingMessage {
@@ -48,6 +69,6 @@
 }
 
 .correctAnswer {
-  background-color: rgba(0, 128, 0, .4);
+  background-color: rgba(0, 168, 0, .3);
   display: inline-block;
 }
