@@ -45,6 +45,8 @@ angular.module('QuizFrontEnd', ['ngRoute'])
       let {topic, number} = $routeParams;
       $scope.questions = [];
       $scope.currentQuestion = 0;
+      $scope.correct = 0;
+      $scope.wrong = false;
       questionsService.getQuestions(topic, number)
         .then(res=>{
           $scope.questions=res.data;
@@ -53,6 +55,7 @@ angular.module('QuizFrontEnd', ['ngRoute'])
         let radios = document.getElementsByName('answerChoices');
         let correctMessage = document.getElementById('correctMessage');
         let wrongMessage = document.getElementById('wrongMessage');
+        let resultsContainer = document.getElementById('resultsContainer');
         function showGradingMessage(messageType) {
           messageType.classList.add('showMessage');
           $timeout(function() {
@@ -61,6 +64,12 @@ angular.module('QuizFrontEnd', ['ngRoute'])
         }
         function incrementQuestionIndex() {
           $scope.currentQuestion++;
+          if($scope.currentQuestion >= $scope.questions.length) {
+            console.log('end of quiz');
+            $scope.grade = `${$scope.correct} / ${$scope.questions.length}`;
+            $scope.gradePercent = (Math.round($scope.correct / $scope.questions.length * 100)).toFixed(1);
+            resultsContainer.style.display = 'block';
+          }
         }
         // find the selected answer
         for (let i = 0, length = radios.length; i < length; i++) {
@@ -71,16 +80,20 @@ angular.module('QuizFrontEnd', ['ngRoute'])
             if(radios[i].value == correctAnswerIndex) {
               // let user know they were correct and go to next question
               showGradingMessage(correctMessage);
-              $timeout(incrementQuestionIndex, 1400);
-              // Handle end of quiz
-              if($scope.currentQuestion >= $scope.questions.length) {
-                console.log('end of quiz');
+              if($scope.wrong) {
+                $scope.wrong = false;
               }
+              else {
+                $scope.correct++;
+                $scope.wrong = false;
+              }
+              $timeout(incrementQuestionIndex, 1400);
             }
             // if answer is wrong
             else {
               // let user know they are wrong and show correct answer
               correctAnswerElement.classList.add('correctAnswer');
+              $scope.wrong = true;
               showGradingMessage(wrongMessage);
             }
             break;

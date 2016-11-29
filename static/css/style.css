@@ -81,3 +81,12 @@
 .correctAnswer {
   background-color: rgba(0, 168, 0, .3);
 }
+
+#resultsContainer {
+  display: none;
+}
+
+#resultsContainer h4 {
+  display: inline-block;
+  width: 70px;
+}
