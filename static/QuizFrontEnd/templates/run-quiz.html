@@ -1,8 +1,19 @@
-<h1>Run Quiz Page</h1>
+<h1>Quiz</h1>
 
-<!-- <h2 ng-repeat="question in questions">{{question.questionText}}</h2> -->
+<div class="gradingMessage" id="correctMessage">Correct!</div>
+<div class="gradingMessage" id="wrongMessage">Wrong</div>
 
-<div class="question-area">
+<div class="quizQuestionContainer">
   <h3>{{questions[currentQuestion].questionText}}</h3>
-  <button clas="btn btn-primary" ng-click="checkAndNext()">Next</button>
+  <div class="form-check answerChoiceContainer" ng-repeat="answerChoice in questions[currentQuestion].answerChoices">
+    <input id="{{answerChoice}}" name="answerChoices" type="radio" value="{{answerChoice}}"></input>
+    <label class="form-check-label form-control" data-index="{{answerChoice}}" for="{{answerChoice}}">{{answerChoice}}</label>
+  </div>
+  <button id="nextButton" class="btn btn-primary" ng-click="checkAndNext()">Next</button>
+</div>
+
+<div id="resultsContainer">
+  <h3>Grade</h3>
+  <h4>{{grade}}</h4>
+  <h4>{{gradePercent}} %</h4>
 </div>
