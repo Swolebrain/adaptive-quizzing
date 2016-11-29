@@ -59,10 +59,12 @@ angular.module('QuizFrontEnd', ['ngRoute'])
             messageType.classList.remove('showMessage');
           }, 1500);
         }
+        // find the selected answer
         for (let i = 0, length = radios.length; i < length; i++) {
           if (radios[i].checked) {
-            // check question
             let correctAnswerIndex = $scope.questions[$scope.currentQuestion].answerChoices[$scope.questions[$scope.currentQuestion].answerIndex];
+            let correctAnswerElement = document.querySelector("[data-index='" + correctAnswerIndex + "']");
+            // if answer is correct
             if(radios[i].value == correctAnswerIndex) {
               // let user know they were correct and go to next question
               showGradingMessage(correctMessage);
@@ -72,9 +74,9 @@ angular.module('QuizFrontEnd', ['ngRoute'])
                 console.log('end of quiz');
               }
             }
+            // if answer is wrong
             else {
               // let user know they are wrong and show correct answer
-              let correctAnswerElement = document.querySelector("[data-index='" + correctAnswerIndex + "']");
               correctAnswerElement.classList.add('correctAnswer');
               showGradingMessage(wrongMessage);
             }
