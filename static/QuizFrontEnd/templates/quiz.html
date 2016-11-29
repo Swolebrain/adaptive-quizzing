@@ -1,7 +1,16 @@
-<h1>This is going to be the quiz template</h1>
+<h1>Create A Quiz</h1>
 
-<div class="question-section" ng-repeat="topic in topics">
-  <h3>{{topic.name}}</h3>
+<div class='row'>
+  <div class='col-xs-12 col-md-6'>
+    <h2>Which Topic?</h2>
+    <select ng-model="selectedTopic" class="form-control">
+      <option ng-repeat='topic in topics' value="{{topic.name}}">
+        {{topic.name}}
+      </option>
+    </select>
+    <h2>How Many Questions?</h2>
+    <input ng-model="numOfQuestions" type="number" class="form-control" placeholder="0">
+  </div>
 </div>
 
-<a class="btn btn-primary" id="" href="#/run-quiz/foundations/3">Start Quiz!</a>
+<button class="btn btn-primary" ng-click="startQuiz()">Start Quiz!</button>

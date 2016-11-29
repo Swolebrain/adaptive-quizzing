@@ -1,4 +1,18 @@
-<h1>This is the quiz template</h1>
-<h2 ng-repeat="topic in topics">
-  {{topic.name}}
-</h2>
+<div class='row'>
+  <div class='col-xs-12 col-md-6'>
+    <h2>Existing Topics</h2>
+    <ul class='topics'>
+      <li ng-repeat='topic in topics'> {{topic.name}}
+        <ul>
+          <li ng-repeat='subtopic in topic.subTopics'>
+            {{subtopic}}
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div class='col-xs-12 col-md-6'>
+    <h2>Add New Topic</h2>
+    <create-topic reload='reload'></create-topic>
+  </div>
+</div>

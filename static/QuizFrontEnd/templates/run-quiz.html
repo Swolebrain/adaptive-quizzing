@@ -1,8 +1,13 @@
 <h1>Run Quiz Page</h1>
 
-<!-- <h2 ng-repeat="question in questions">{{question.questionText}}</h2> -->
+<div class="gradingMessage" id="correctMessage">Correct!</div>
+<div class="gradingMessage" id="wrongMessage">Wrong</div>
 
 <div class="question-area">
   <h3>{{questions[currentQuestion].questionText}}</h3>
+  <div ng-repeat="answerChoice in questions[currentQuestion].answerChoices">
+    <input id="{{answerChoice}}" name="answerChoices" type="radio" value="{{answerChoice}}"></input>
+    <label data-index="{{answerChoice}}" for="{{answerChoice}}">{{answerChoice}}</label>
+  </div>
   <button clas="btn btn-primary" ng-click="checkAndNext()">Next</button>
 </div>
