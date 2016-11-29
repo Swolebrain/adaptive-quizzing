@@ -20,8 +20,13 @@
   margin-bottom: 20px;
 }
 
+.quizQuestionContainer button {
+  margin-top: 10px;
+}
+
 .answerChoiceContainer {
   margin: 10px;
+  margin-left: 0;
 }
 
 .answerChoiceContainer input,
