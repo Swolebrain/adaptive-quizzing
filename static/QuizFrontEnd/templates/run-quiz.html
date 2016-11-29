@@ -5,9 +5,9 @@
 
 <div class="quizQuestionContainer">
   <h3>{{questions[currentQuestion].questionText}}</h3>
-  <div class="answerChoiceContainer" ng-repeat="answerChoice in questions[currentQuestion].answerChoices">
+  <div class="form-check answerChoiceContainer" ng-repeat="answerChoice in questions[currentQuestion].answerChoices">
     <input id="{{answerChoice}}" name="answerChoices" type="radio" value="{{answerChoice}}"></input>
-    <label data-index="{{answerChoice}}" for="{{answerChoice}}">{{answerChoice}}</label>
+    <label class="form-check-label form-control" data-index="{{answerChoice}}" for="{{answerChoice}}">{{answerChoice}}</label>
   </div>
   <button class="btn btn-primary" ng-click="checkAndNext()">Next</button>
 </div>

@@ -40,7 +40,7 @@ angular.module('QuizFrontEnd', ['ngRoute'])
 
   }])
   .controller('RunQuizController', ['$scope', 'questionsService', '$routeParams', '$timeout', '$location',
-    function($scope, questionsService, $routeParams){
+    function($scope, questionsService, $routeParams, $timeout){
       console.log("RunQuizController running...");
       let {topic, number} = $routeParams;
       $scope.questions = [];
@@ -55,9 +55,12 @@ angular.module('QuizFrontEnd', ['ngRoute'])
         let wrongMessage = document.getElementById('wrongMessage');
         function showGradingMessage(messageType) {
           messageType.classList.add('showMessage');
-          setTimeout(function() {
+          $timeout(function() {
             messageType.classList.remove('showMessage');
           }, 1500);
+        }
+        function incrementQuestionIndex() {
+          $scope.currentQuestion++;
         }
         // find the selected answer
         for (let i = 0, length = radios.length; i < length; i++) {
@@ -68,7 +71,7 @@ angular.module('QuizFrontEnd', ['ngRoute'])
             if(radios[i].value == correctAnswerIndex) {
               // let user know they were correct and go to next question
               showGradingMessage(correctMessage);
-              $scope.currentQuestion++;
+              $timeout(incrementQuestionIndex, 1400);
               // Handle end of quiz
               if($scope.currentQuestion >= $scope.questions.length) {
                 console.log('end of quiz');

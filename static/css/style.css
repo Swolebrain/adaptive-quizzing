@@ -31,6 +31,11 @@
 
 .answerChoiceContainer input {
   margin-right: 7px;
+  display: none;
+}
+
+.answerChoiceContainer input[type=radio]:checked + label {
+  background-color: #eee;
 }
 
 .answerChoiceContainer label:hover,
@@ -70,5 +75,4 @@
 
 .correctAnswer {
   background-color: rgba(0, 168, 0, .3);
-  display: inline-block;
 }
