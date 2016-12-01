@@ -53,10 +53,22 @@ angular.module('QuizFrontEnd', ['ngRoute'])
         });
       let correctMessage = document.getElementById('correctMessage');
       let wrongMessage = document.getElementById('wrongMessage');
+      let answersContainer = document.getElementById('answersContainer');
+      let textAnswer = document.getElementById('textAnswer');
       let resultsContainer = document.getElementById('resultsContainer');
-      let nextButton = document.getElementById('nextButton');
-      nextButton.style.display = 'inline-block';
-      $scope.checkAndNext = function(){
+      let showAnswerChoicesButton = document.getElementById('showAnswerChoices');
+      let checkAnswerButton = document.getElementById('checkAnswer');
+      checkAnswerButton.classList.add('hide');
+      answersContainer.classList.add('hide');
+      textAnswer.classList.remove('hide');
+      $scope.showAnswerChoices = function() {
+        answersContainer.classList.remove('hide');
+        textAnswer.classList.add('hide');
+        showAnswerChoicesButton.classList.add('hide');
+        checkAnswerButton.classList.remove('hide');
+      };
+      $scope.checkAnswer = function(){
+        textAnswer.value = "";
         let answers = document.getElementsByName('answerChoices');
         function showGradingMessage(messageType) {
           messageType.classList.add('showMessage');
@@ -66,12 +78,18 @@ angular.module('QuizFrontEnd', ['ngRoute'])
         }
         function incrementQuestionIndex() {
           $scope.currentQuestion++;
+          showAnswerChoicesButton.classList.remove('hide');
+          checkAnswerButton.classList.add('hide');
+          answersContainer.classList.add('hide');
+          textAnswer.classList.remove('hide');
           if($scope.currentQuestion >= $scope.questions.length) {
             console.log('end of quiz');
             $scope.grade = `${$scope.correct} / ${$scope.questions.length}`;
             $scope.gradePercent = (Math.round($scope.correct / $scope.questions.length * 100)).toFixed(1);
             resultsContainer.style.display = 'block';
-            nextButton.style.display = 'none';
+            checkAnswerButton.classList.add('hide');
+            textAnswer.classList.add('hide');
+            showAnswerChoicesButton.classList.add('hide');
           }
         }
         // find the selected answer
