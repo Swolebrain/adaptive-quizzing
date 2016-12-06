@@ -1,9 +1,127 @@
-{"_id":{"$oid":"583c899ec727f45005fd1185"},"userID":{"$oid":"583b611fc05f891da8e0dce7"},"topic":"WEB1010","questionText":"Why is it a best practice to put script tags at the bottom of the body element?","answerIndex":3,"questionType":"adaptive","answerChoices":["So that they load asynchronously","They won't work if you put them in the head","It doesn't matter whether you put them at the top of the body or the bottom","Your webpage will be displayed faster since the DOM is loaded from top the bottom"],"subTopics":["HTML Basics","JavaScript Basics"],"__v":0}
-{"_id":{"$oid":"583c8a4bc727f45005fd1186"},"userID":{"$oid":"583b611fc05f891da8e0dce7"},"topic":"WEB1010","questionText":"What is an \"opening tag\"?","answerIndex":0,"questionType":"adaptive","answerChoices":["In \u003ch1  id=\"title\" class=\"about\"\u003eAbout\u003c/h1\u003e, it is \u003ch1 id=\"title\" class=\"about\"\u003e","In \u003ch1  id=\"title\" class=\"about\"\u003eAbout\u003c/h1\u003e, it is h1","In \u003ch1  id=\"title\" class=\"about\"\u003eAbout\u003c/h1\u003e, it is In \u003ch1  id=\"title\" class=\"about\"\u003eAbout\u003c/h1\u003eAbout\u003c/h1\u003e","In \u003ch1  id=\"title\" class=\"about\"\u003eAbout\u003c/h1\u003e, it is About","In \u003ch1  id=\"title\" class=\"about\"\u003eAbout\u003c/h1\u003e, it is \u003c/h1\u003e"],"subTopics":["HTML Basics"],"__v":0}
-{"_id":{"$oid":"583c8b20c727f45005fd1187"},"userID":{"$oid":"583b611fc05f891da8e0dce7"},"topic":"WEB1010","questionText":"Add a class name of \"header\" to the following element: \u003cdiv\u003e\u003c/div\u003e","answerIndex":2,"questionType":"adaptive","answerChoices":["\u003cdiv\u003eheader\u003c/div\u003e","\u003cdiv\u003e\u003c/div class=\"header\"\u003e","\u003cdiv class=\"header\"\u003e\u003c/div\u003e","\u003cdiv header\u003e\u003c/div\u003e"],"subTopics":["HTML Basics"],"__v":0}
-{"_id":{"$oid":"583c8d30c727f45005fd1188"},"userID":{"$oid":"583b611fc05f891da8e0dce7"},"topic":"WEB1010","questionText":"Which element do we use to link an external CSS file into our document?","answerIndex":1,"questionType":"adaptive","answerChoices":["\u003cscript\u003e\u003c/script\u003e","\u003clink\u003e","\u003cmeta\u003e","\u003ccss\u003e\u003c/css\u003e"],"subTopics":["HTML Basics"],"__v":0}
-{"_id":{"$oid":"583c8d7fc727f45005fd1189"},"userID":{"$oid":"583b611fc05f891da8e0dce7"},"topic":"WEB1010","questionText":"What is the name of the attribute in a script tag where we provide the URL of an external JavaScript file?","answerIndex":2,"questionType":"adaptive","answerChoices":["href","link","src","content"],"subTopics":["HTML Basics"],"__v":0}
-{"_id":{"$oid":"584603ee191662588c8fdee5"},"userID":{"$oid":"58408287ea3e124f62bcbb73"},"topic":"WEB1010","questionText":"Which method allows you to add a value to the end of an array? Example answer:  .add()","answerIndex":2,"questionType":"adaptive","answerChoices":[".add()",".addValue()",".push()",".shift()"],"subTopics":["JavaScript Basics"],"__v":0}
-{"_id":{"$oid":"58460435191662588c8fdee6"},"userID":{"$oid":"58408287ea3e124f62bcbb73"},"topic":"WEB1010","questionText":"Wherefore are thou, Romeo?","answerIndex":1,"questionType":"mc","answerChoices":["Subway","Yo Mama's House","Cleveland","South Beach","FVI"],"subTopics":["JavaScript Basics"],"__v":0}
-{"_id":{"$oid":"584604bb191662588c8fdee7"},"userID":{"$oid":"58408287ea3e124f62bcbb73"},"topic":"WEB1010","questionText":"How far do you jump?","answerIndex":2,"questionType":"mc","answerChoices":["2 feet","As far as you can.","As far as I tell you to jump, no less.","No jumping allowed."],"subTopics":["JavaScript Basics"],"__v":0}
-{"_id":{"$oid":"58470a22cb630f07e31c957e"},"userID":{"$oid":"58408287ea3e124f62bcbb73"},"topic":"WEB1010","questionText":"Using JavaScript, what is the best way to select this element:  \u003cdiv id=\"header\"\u003e\u003c/div\u003e ?","answerIndex":3,"questionType":"adaptive","answerChoices":["$('#header')","document.querySelector('#header')","Document.getElementByID('#header')","document.getElementById('header')"],"subTopics":["JavaScript DOM Manipulation","JavaScript Basics"],"__v":0}
+{
+    "_id": {
+        "$oid": "583c899ec727f45005fd1185"
+    },
+    "userID": {
+        "$oid": "583b611fc05f891da8e0dce7"
+    },
+    "topic": "WEB1010",
+    "questionText": "Why is it a best practice to put script tags at the bottom of the body element?",
+    "answerIndex": 3,
+    "questionType": "adaptive",
+    "answerChoices": ["So that they load asynchronously", "They won't work if you put them in the head", "It doesn't matter whether you put them at the top of the body or the bottom", "Your webpage will be displayed faster since the DOM is loaded from top the bottom"],
+    "subTopics": ["HTML Basics", "JavaScript Basics"],
+    "__v": 0
+} {
+    "_id": {
+        "$oid": "583c8a4bc727f45005fd1186"
+    },
+    "userID": {
+        "$oid": "583b611fc05f891da8e0dce7"
+    },
+    "topic": "WEB1010",
+    "questionText": "What is an \"opening tag\"?",
+    "answerIndex": 0,
+    "questionType": "adaptive",
+    "answerChoices": ["In \u003ch1  id=\"title\" class=\"about\"\u003eAbout\u003c/h1\u003e, it is \u003ch1 id=\"title\" class=\"about\"\u003e", "In \u003ch1  id=\"title\" class=\"about\"\u003eAbout\u003c/h1\u003e, it is h1", "In \u003ch1  id=\"title\" class=\"about\"\u003eAbout\u003c/h1\u003e, it is In \u003ch1  id=\"title\" class=\"about\"\u003eAbout\u003c/h1\u003eAbout\u003c/h1\u003e", "In \u003ch1  id=\"title\" class=\"about\"\u003eAbout\u003c/h1\u003e, it is About", "In \u003ch1  id=\"title\" class=\"about\"\u003eAbout\u003c/h1\u003e, it is \u003c/h1\u003e"],
+    "subTopics": ["HTML Basics"],
+    "__v": 0
+} {
+    "_id": {
+        "$oid": "583c8b20c727f45005fd1187"
+    },
+    "userID": {
+        "$oid": "583b611fc05f891da8e0dce7"
+    },
+    "topic": "WEB1010",
+    "questionText": "Add a class name of \"header\" to the following element: \u003cdiv\u003e\u003c/div\u003e",
+    "answerIndex": 2,
+    "questionType": "adaptive",
+    "answerChoices": ["\u003cdiv\u003eheader\u003c/div\u003e", "\u003cdiv\u003e\u003c/div class=\"header\"\u003e", "\u003cdiv class=\"header\"\u003e\u003c/div\u003e", "\u003cdiv header\u003e\u003c/div\u003e"],
+    "subTopics": ["HTML Basics"],
+    "__v": 0
+} {
+    "_id": {
+        "$oid": "583c8d30c727f45005fd1188"
+    },
+    "userID": {
+        "$oid": "583b611fc05f891da8e0dce7"
+    },
+    "topic": "WEB1010",
+    "questionText": "Which element do we use to link an external CSS file into our document?",
+    "answerIndex": 1,
+    "questionType": "adaptive",
+    "answerChoices": ["\u003cscript\u003e\u003c/script\u003e", "\u003clink\u003e", "\u003cmeta\u003e", "\u003ccss\u003e\u003c/css\u003e"],
+    "subTopics": ["HTML Basics"],
+    "__v": 0
+} {
+    "_id": {
+        "$oid": "583c8d7fc727f45005fd1189"
+    },
+    "userID": {
+        "$oid": "583b611fc05f891da8e0dce7"
+    },
+    "topic": "WEB1010",
+    "questionText": "What is the name of the attribute in a script tag where we provide the URL of an external JavaScript file?",
+    "answerIndex": 2,
+    "questionType": "adaptive",
+    "answerChoices": ["href", "link", "src", "content"],
+    "subTopics": ["HTML Basics"],
+    "__v": 0
+} {
+    "_id": {
+        "$oid": "584603ee191662588c8fdee5"
+    },
+    "userID": {
+        "$oid": "58408287ea3e124f62bcbb73"
+    },
+    "topic": "WEB1010",
+    "questionText": "Which method allows you to add a value to the end of an array? Example answer:  .add()",
+    "answerIndex": 2,
+    "questionType": "adaptive",
+    "answerChoices": [".add()", ".addValue()", ".push()", ".shift()"],
+    "subTopics": ["JavaScript Basics"],
+    "__v": 0
+} {
+    "_id": {
+        "$oid": "58460435191662588c8fdee6"
+    },
+    "userID": {
+        "$oid": "58408287ea3e124f62bcbb73"
+    },
+    "topic": "WEB1010",
+    "questionText": "Wherefore are thou, Romeo?",
+    "answerIndex": 1,
+    "questionType": "mc",
+    "answerChoices": ["Subway", "Yo Mama's House", "Cleveland", "South Beach", "FVI"],
+    "subTopics": ["JavaScript Basics"],
+    "__v": 0
+} {
+    "_id": {
+        "$oid": "584604bb191662588c8fdee7"
+    },
+    "userID": {
+        "$oid": "58408287ea3e124f62bcbb73"
+    },
+    "topic": "WEB1010",
+    "questionText": "How far do you jump?",
+    "answerIndex": 2,
+    "questionType": "mc",
+    "answerChoices": ["2 feet", "As far as you can.", "As far as I tell you to jump, no less.", "No jumping allowed."],
+    "subTopics": ["JavaScript Basics"],
+    "__v": 0
+} {
+    "_id": {
+        "$oid": "58470a22cb630f07e31c957e"
+    },
+    "userID": {
+        "$oid": "58408287ea3e124f62bcbb73"
+    },
+    "topic": "WEB1010",
+    "questionText": "Using JavaScript, what is the best way to select this element:  \u003cdiv id=\"header\"\u003e\u003c/div\u003e ?",
+    "answerIndex": 3,
+    "questionType": "adaptive",
+    "answerChoices": ["$('#header')", "document.querySelector('#header')", "Document.getElementByID('#header')", "document.getElementById('header')"],
+    "subTopics": ["JavaScript DOM Manipulation", "JavaScript Basics"],
+    "__v": 0
+}
