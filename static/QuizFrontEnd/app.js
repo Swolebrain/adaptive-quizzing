@@ -42,83 +42,141 @@ angular.module('QuizFrontEnd', ['ngRoute'])
   .controller('RunQuizController', ['$scope', 'questionsService', '$routeParams', '$timeout', '$location',
     function($scope, questionsService, $routeParams, $timeout){
       console.log("RunQuizController running...");
+
       let {topic, number} = $routeParams;
-      $scope.questions = [];
-      $scope.currentQuestion = 0;
-      $scope.correct = 0;
-      $scope.wrong = false;
-      questionsService.getQuestions(topic, number)
-        .then(res=>{
-          $scope.questions=res.data;
-        });
       let correctMessage = document.getElementById('correctMessage');
       let wrongMessage = document.getElementById('wrongMessage');
       let answersContainer = document.getElementById('answersContainer');
       let textAnswer = document.getElementById('textAnswer');
       let resultsContainer = document.getElementById('resultsContainer');
-      let showAnswerChoicesButton = document.getElementById('showAnswerChoices');
       let checkAnswerButton = document.getElementById('checkAnswer');
-      checkAnswerButton.classList.add('hide');
-      answersContainer.classList.add('hide');
-      textAnswer.classList.remove('hide');
-      $scope.showAnswerChoices = function() {
-        answersContainer.classList.remove('hide');
-        textAnswer.classList.add('hide');
-        showAnswerChoicesButton.classList.add('hide');
-        checkAnswerButton.classList.remove('hide');
-      };
+
+      $scope.questions = [];
+      $scope.currentQuestion = 0;
+      $scope.correct = 0;
+      $scope.wrong = false;
+      questionsService.getQuestions(topic, number)
+      .then(res=>{
+        $scope.questions=res.data;
+
+        $scope.isAdaptive = $scope.questions[$scope.currentQuestion].questionType;
+        $scope.correctAnswerIndex = $scope.questions[$scope.currentQuestion].answerIndex;
+        $scope.correctAnswerValue = $scope.questions[$scope.currentQuestion].answerChoices[$scope.correctAnswerIndex];
+
+        if($scope.isAdaptive === "adaptive") {
+          textAnswer.classList.remove('hide');
+          answersContainer.classList.add('hide');
+        }
+        else {
+          textAnswer.classList.add('hide');
+          answersContainer.classList.remove('hide');
+        }
+      });
+
+      textAnswer.addEventListener('keydown', function(e) {
+        if(e.keyCode === 13) $scope.checkAnswer();
+      });
+
       $scope.checkAnswer = function(){
-        textAnswer.value = "";
-        let answers = document.getElementsByName('answerChoices');
+        if(textAnswer.value === "" && $scope.isAdaptive === "adaptive") return;
+        $scope.correctAnswerElement = getLabelsByValue($scope.correctAnswerValue)[0];
+
+        if($scope.isAdaptive === "adaptive") {
+          if(textAnswer.value === $scope.correctAnswerValue) {
+            onCorrectAnswer();
+          }
+          else {
+            onWrongTextAnswer();
+            $scope.isAdaptive = 'mc';
+          }
+        }
+        else {
+          let answers = document.getElementsByName('answerChoices');
+          for (let i = 0, length = answers.length; i < length; i++) {
+            if (answers[i].checked) {
+              if(answers[i].value == $scope.correctAnswerValue) {
+                onCorrectAnswer();
+              }
+              else {
+                onWrongMCAnswer();
+              }
+              break;
+            }
+          }
+        }
+
         function showGradingMessage(messageType) {
           messageType.classList.add('showMessage');
           $timeout(function() {
             messageType.classList.remove('showMessage');
           }, 1200);
         }
-        function incrementQuestionIndex() {
+
+        function loadNextQuestion() {
           $scope.currentQuestion++;
-          showAnswerChoicesButton.classList.remove('hide');
-          checkAnswerButton.classList.add('hide');
-          answersContainer.classList.add('hide');
-          textAnswer.classList.remove('hide');
+          // if End of quiz
           if($scope.currentQuestion >= $scope.questions.length) {
-            console.log('end of quiz');
-            $scope.grade = `${$scope.correct} / ${$scope.questions.length}`;
-            $scope.gradePercent = (Math.round($scope.correct / $scope.questions.length * 100)).toFixed(1);
-            resultsContainer.style.display = 'block';
-            checkAnswerButton.classList.add('hide');
+            onEndOfQuiz();
+            return false;
+          }
+
+          $scope.isAdaptive = $scope.questions[$scope.currentQuestion].questionType;
+          $scope.correctAnswerIndex = $scope.questions[$scope.currentQuestion].answerIndex;
+          $scope.correctAnswerValue = $scope.questions[$scope.currentQuestion].answerChoices[$scope.correctAnswerIndex];
+          textAnswer.value = "";
+
+          if($scope.isAdaptive === "adaptive") {
+            textAnswer.classList.remove('hide');
+            answersContainer.classList.add('hide');
+          }
+          else {
             textAnswer.classList.add('hide');
-            showAnswerChoicesButton.classList.add('hide');
+            answersContainer.classList.remove('hide');
           }
         }
-        // find the selected answer
-        for (let i = 0, length = answers.length; i < length; i++) {
-          if (answers[i].checked) {
-            let correctAnswerIndex = $scope.questions[$scope.currentQuestion].answerChoices[$scope.questions[$scope.currentQuestion].answerIndex];
-            let correctAnswerElement = document.querySelector("[data-index='" + correctAnswerIndex + "']");
-            // if answer is correct
-            if(answers[i].value == correctAnswerIndex) {
-              // let user know they were correct and go to next question
-              showGradingMessage(correctMessage);
-              if($scope.wrong) {
-                $scope.wrong = false;
-              }
-              else {
-                $scope.correct++;
-                $scope.wrong = false;
-              }
-              $timeout(incrementQuestionIndex, 1000);
-            }
-            // if answer is wrong
-            else {
-              // let user know they are wrong and show correct answer
-              correctAnswerElement.classList.add('correctAnswer');
-              $scope.wrong = true;
-              showGradingMessage(wrongMessage);
-            }
-            break;
+
+        function onCorrectAnswer() {
+          showGradingMessage(correctMessage);
+          if($scope.wrong) {
+            $scope.wrong = false;
           }
+          else {
+            $scope.correct++;
+            $scope.wrong = false;
+          }
+          $timeout(loadNextQuestion, 1000);
+        }
+
+        function onWrongTextAnswer() {
+          showGradingMessage(wrongMessage);
+          $timeout(function() {
+            answersContainer.classList.remove('hide');
+            textAnswer.classList.add('hide');
+          }, 1000);
+        }
+
+        function onWrongMCAnswer() {
+          $scope.correctAnswerElement.classList.add('correctAnswer');
+          $scope.wrong = true;
+          showGradingMessage(wrongMessage);
+        }
+
+        function onEndOfQuiz() {
+          console.log('end of quiz');
+          $scope.grade = `${$scope.correct} / ${$scope.questions.length}`;
+          $scope.gradePercent = (Math.round($scope.correct / $scope.questions.length * 100)).toFixed(1);
+          resultsContainer.style.display = 'block';
+          checkAnswerButton.classList.add('hide');
+          textAnswer.classList.add('hide');
+        }
+
+        function getLabelsByValue(value) {
+            var lables = document.getElementsByTagName("label");
+            var results = [];
+            for(var i = 0; i < lables.length; i++) {
+              if(lables[i].textContent == value) results.push(lables[i]);
+            }
+            return results;
         }
         //check the ng-model corresponding to the angular radio group
         //against $scope.questions[$scope.currentQuestion].answerChoices[$scope.questions[$scope.currentQuestion].answerIndex]
