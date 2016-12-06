@@ -67,6 +67,7 @@ angular.module('QuizFrontEnd', ['ngRoute'])
 
         if($scope.isAdaptive === "adaptive") {
           textAnswer.classList.remove('hide');
+          textAnswer.focus();
           answersContainer.classList.add('hide');
         }
         else {
@@ -141,6 +142,7 @@ angular.module('QuizFrontEnd', ['ngRoute'])
 
           if($scope.isAdaptive === "adaptive") {
             textAnswer.classList.remove('hide');
+            textAnswer.focus();
             answersContainer.classList.add('hide');
           }
           else {
