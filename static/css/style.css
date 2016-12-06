@@ -36,6 +36,11 @@
   transition: all .3s;
 }
 
+.validateTextAnswer {
+  margin-top: 15px;
+  color: red;
+}
+
 .answerChoiceContainer {
   margin: 10px;
   margin-left: 0;
@@ -53,7 +58,11 @@
 }
 
 .answerChoiceContainer input[type=radio]:checked + label {
-  background-color: #eee;
+  background-color: rgba(0, 150, 200, .2);
+}
+
+.correctAnswer {
+  background-color: rgba(0, 168, 0, .3);
 }
 
 .answerChoiceContainer label:hover,
@@ -89,10 +98,6 @@
 .showMessage {
   top: 0;
   opacity: 1;
-}
-
-.correctAnswer {
-  background-color: rgba(0, 168, 0, .3);
 }
 
 #resultsContainer {

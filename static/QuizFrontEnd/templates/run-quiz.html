@@ -1,18 +1,21 @@
 <h1>Quiz</h1>
 
-<div class="gradingMessage" id="correctMessage">Correct!</div>
-<div class="gradingMessage" id="wrongMessage">Wrong</div>
+<div class="gradingMessage" id="correctMessage">Correct! +{{points}}</div>
+<div class="gradingMessage" id="wrongMessage">Wrong. +0</div>
 
 <div class="quizQuestionContainer">
   <h3>{{questions[currentQuestion].questionText}}</h3>
-  <input type="text" id="textAnswer" class="textAnswer form-control hide" ng-model="textAnswer" placeholder="Type your answer...">
-  <div id="answersContainer">
-    <div class="form-check answerChoiceContainer" ng-repeat="answerChoice in questions[currentQuestion].answerChoices">
-      <input id="{{answerChoice}}" name="answerChoices" type="radio" value="{{answerChoice}}"></input>
-      <label class="form-check-label form-control" for="{{answerChoice}}">{{answerChoice}}</label>
+  <form ng-submit="checkAnswer()">
+    <input type="text" id="textAnswer" class="textAnswer form-control hide" ng-model="textAnswer" placeholder="Type your answer...">
+    <div class="validateTextAnswer" ng-show="validateTextAnswer">Please enter an answer</div>
+    <div id="answersContainer">
+      <div class="form-check answerChoiceContainer" ng-repeat="answerChoice in questions[currentQuestion].answerChoices">
+        <input id="{{answerChoice}}" name="answerChoices" type="radio" value="{{answerChoice}}"></input>
+        <label class="form-check-label form-control" for="{{answerChoice}}">{{answerChoice}}</label>
+      </div>
     </div>
-  </div>
-  <button id="checkAnswer" class="btn btn-primary" ng-click="checkAnswer()">Check Answer</button>
+    <button id="checkAnswer" class="btn btn-primary" type="submit">Check Answer</button>
+  </form>
 </div>
 
 <div id="resultsContainer">

@@ -50,18 +50,20 @@ angular.module('QuizFrontEnd', ['ngRoute'])
       let textAnswer = document.getElementById('textAnswer');
       let resultsContainer = document.getElementById('resultsContainer');
       let checkAnswerButton = document.getElementById('checkAnswer');
-
       $scope.questions = [];
       $scope.currentQuestion = 0;
       $scope.correct = 0;
-      $scope.wrong = false;
+      $scope.wrongMC = false;
+      $scope.wrongTextAnswer = false;
+      $scope.validateTextAnswer = false;
+
       questionsService.getQuestions(topic, number)
       .then(res=>{
-        $scope.questions=res.data;
-
+        $scope.questions = res.data;
         $scope.isAdaptive = $scope.questions[$scope.currentQuestion].questionType;
         $scope.correctAnswerIndex = $scope.questions[$scope.currentQuestion].answerIndex;
         $scope.correctAnswerValue = $scope.questions[$scope.currentQuestion].answerChoices[$scope.correctAnswerIndex];
+
 
         if($scope.isAdaptive === "adaptive") {
           textAnswer.classList.remove('hide');
@@ -73,21 +75,24 @@ angular.module('QuizFrontEnd', ['ngRoute'])
         }
       });
 
-      textAnswer.addEventListener('keydown', function(e) {
-        if(e.keyCode === 13) $scope.checkAnswer();
-      });
-
       $scope.checkAnswer = function(){
-        if(textAnswer.value === "" && $scope.isAdaptive === "adaptive") return;
+        if(textAnswer.value === "" && $scope.isAdaptive === "adaptive") {
+          $scope.validateTextAnswer = true;
+          return;
+        }
+        else $scope.validateTextAnswer = false;
+
         $scope.correctAnswerElement = getLabelsByValue($scope.correctAnswerValue)[0];
 
         if($scope.isAdaptive === "adaptive") {
           if(textAnswer.value === $scope.correctAnswerValue) {
+            $scope.wrongTextAnswer = false;
             onCorrectAnswer();
           }
           else {
             onWrongTextAnswer();
             $scope.isAdaptive = 'mc';
+            $scope.wrongTextAnswer = true;
           }
         }
         else {
@@ -103,6 +108,15 @@ angular.module('QuizFrontEnd', ['ngRoute'])
               break;
             }
           }
+        }
+
+        function getLabelsByValue(value) {
+            var lables = document.getElementsByTagName("label");
+            var results = [];
+            for(var i = 0; i < lables.length; i++) {
+              if(lables[i].textContent == value) results.push(lables[i]);
+            }
+            return results;
         }
 
         function showGradingMessage(messageType) {
@@ -136,14 +150,21 @@ angular.module('QuizFrontEnd', ['ngRoute'])
         }
 
         function onCorrectAnswer() {
-          showGradingMessage(correctMessage);
-          if($scope.wrong) {
-            $scope.wrong = false;
+          if($scope.wrongMC) {
+            $scope.wrongMC = false;
+            $scope.points = "0";
+          }
+          else if($scope.wrongTextAnswer){
+            $scope.correct += 0.5;
+            $scope.points = "0.5";
+            $scope.wrongTextAnswer = false;
           }
           else {
-            $scope.correct++;
-            $scope.wrong = false;
+            $scope.correct += 1;
+            $scope.points = "1";
           }
+
+          showGradingMessage(correctMessage);
           $timeout(loadNextQuestion, 1000);
         }
 
@@ -157,7 +178,7 @@ angular.module('QuizFrontEnd', ['ngRoute'])
 
         function onWrongMCAnswer() {
           $scope.correctAnswerElement.classList.add('correctAnswer');
-          $scope.wrong = true;
+          $scope.wrongMC = true;
           showGradingMessage(wrongMessage);
         }
 
@@ -168,15 +189,6 @@ angular.module('QuizFrontEnd', ['ngRoute'])
           resultsContainer.style.display = 'block';
           checkAnswerButton.classList.add('hide');
           textAnswer.classList.add('hide');
-        }
-
-        function getLabelsByValue(value) {
-            var lables = document.getElementsByTagName("label");
-            var results = [];
-            for(var i = 0; i < lables.length; i++) {
-              if(lables[i].textContent == value) results.push(lables[i]);
-            }
-            return results;
         }
         //check the ng-model corresponding to the angular radio group
         //against $scope.questions[$scope.currentQuestion].answerChoices[$scope.questions[$scope.currentQuestion].answerIndex]
