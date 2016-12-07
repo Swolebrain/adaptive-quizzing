@@ -24,9 +24,27 @@
   margin-top: 10px;
 }
 
+.hide {
+  opacity: 0;
+  margin: 0;
+  padding: 0;
+  max-height: 0;
+  max-width: 0;
+}
+
+.textAnswer {
+  transition: all .3s;
+}
+
+.validateTextAnswer {
+  margin-top: 15px;
+  color: red;
+}
+
 .answerChoiceContainer {
   margin: 10px;
   margin-left: 0;
+  transition: all .3s;
 }
 
 .answerChoiceContainer input,
@@ -40,11 +58,19 @@
 }
 
 .answerChoiceContainer input[type=radio]:checked + label {
-  background-color: #eee;
+  background-color: rgba(0, 150, 200, .2);
+}
+
+.correctAnswer {
+  background-color: rgba(0, 168, 0, .3);
 }
 
 .answerChoiceContainer label:hover,
 .answerChoiceContainer label:focus {
+  background-color: #eee;
+}
+
+.answerChoiceContainer input:focus + label {
   background-color: #eee;
 }
 
@@ -76,10 +102,6 @@
 .showMessage {
   top: 0;
   opacity: 1;
-}
-
-.correctAnswer {
-  background-color: rgba(0, 168, 0, .3);
 }
 
 #resultsContainer {
